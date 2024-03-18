@@ -12,24 +12,41 @@ public class RepositoryService {
     private final TestObjectDaoImpl testObjectDao;
 
     public RepositoryService() {
-        String jdbcUrl = System.getenv("DBUrl");
-        String user = System.getenv("DBUser");
-        String pass = System.getenv("DBPassword");
-        String driver = "com.mysql.jdbc.Driver";
-        SessionFactory sessionFactory = configureHibernate(jdbcUrl, user, pass, driver);
+        final String dbUrlParamName = "DBUrl";
+        final String dbUserParamName = "DBUser";
+        final String dbPasswordParamName = "DBPassword";
+        String jdbcUrl = System.getenv(dbUrlParamName);
+        String user = System.getenv(dbUserParamName);
+        String pass = System.getenv(dbPasswordParamName);
+        SessionFactory sessionFactory = configureHibernate(jdbcUrl, user, pass);
         EntityManagerUtil entityManagerUtil = new EntityManagerUtil(sessionFactory);
         testObjectDao = new TestObjectDaoImpl(entityManagerUtil);
     }
 
-    private static SessionFactory configureHibernate(String jdbcUrl, String user, String pass, String driver) {
+    private static SessionFactory configureHibernate(String jdbcUrl, String user, String pass) {
+        final String point = ".";
+        final String hibernateParamName = "hibernate";
+        final String connectionParamName = "connection";
+        final String urlParamName = "url";
+        final String dialectParamName = "dialect";
+        final String orgParamName = "org";
+        final String mySQLDialectParamName = "MySQLDialect";
+        final String usernameParamName = "username";
+        final String passwordParamName = "password";
+        final String driverClassParamName = "driver_class";
+        final String showSqlParamName = "show_sql";
+        final String formatSqlParamName = "format_sql";
+        final String driverParamName = "com.mysql.jdbc.Driver";
         Properties properties = new Properties();
-        properties.setProperty("hibernate.connection.url", jdbcUrl);
-        properties.setProperty("dialect", "org.hibernate.dialect.MySQLDialect");
-        properties.setProperty("hibernate.connection.username", user);
-        properties.setProperty("hibernate.connection.password", pass);
-        properties.setProperty("hibernate.connection.driver_class", driver);
-        properties.setProperty("hibernate.show_sql", "false");
-        properties.setProperty("hibernate.format_sql", "false");
+        properties.setProperty(String.join(point, hibernateParamName, connectionParamName, urlParamName), jdbcUrl);
+        properties.setProperty(dialectParamName, String.join(point, orgParamName, hibernateParamName, dialectParamName,
+                mySQLDialectParamName));
+        properties.setProperty(String.join(point, hibernateParamName, connectionParamName, usernameParamName), user);
+        properties.setProperty(String.join(point, hibernateParamName, connectionParamName, passwordParamName), pass);
+        properties.setProperty(String.join(point, hibernateParamName, connectionParamName, driverClassParamName),
+                driverParamName);
+        properties.setProperty(String.join(point, hibernateParamName, showSqlParamName), Boolean.toString(false));
+        properties.setProperty(String.join(point, hibernateParamName, formatSqlParamName), Boolean.toString(false));
 
         Configuration configuration = new Configuration();
         configuration.addAnnotatedClass(TestObject.class);

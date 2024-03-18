@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 
 public class EntityManagerUtil {
 
+    private static final String DAO_OPERATION_ERROR_MESSAGE = "A DAO operation error. Transaction is rolled back!";
     private final SessionFactory sessionFactory;
 
     public EntityManagerUtil(SessionFactory sessionFactory) {
@@ -15,6 +16,7 @@ public class EntityManagerUtil {
     }
 
     public void performTransaction(Consumer<EntityManager> entityManagerConsumer) {
+
         EntityManager entityManager = sessionFactory.createEntityManager();
         entityManager.getTransaction().begin();
         try {
@@ -22,7 +24,7 @@ public class EntityManagerUtil {
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
-            throw new RuntimeException("A DAO operation error. Transaction is rolled back!", e);
+            throw new RuntimeException(DAO_OPERATION_ERROR_MESSAGE, e);
         } finally {
             entityManager.close();
         }
@@ -37,7 +39,7 @@ public class EntityManagerUtil {
             return result;
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
-            throw new RuntimeException("A DAO operation error. Transaction is rolled back!", e);
+            throw new RuntimeException(DAO_OPERATION_ERROR_MESSAGE, e);
         } finally {
             entityManager.close();
         }

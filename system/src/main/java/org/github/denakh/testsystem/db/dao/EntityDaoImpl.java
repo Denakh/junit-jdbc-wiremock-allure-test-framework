@@ -47,4 +47,5 @@ public abstract class EntityDaoImpl<ENTITY> {
         emUtil.performTransaction(entityManager ->
                                           entityManager.createQuery("DELETE FROM " + entityClassName).executeUpdate());
     }
+
 }
