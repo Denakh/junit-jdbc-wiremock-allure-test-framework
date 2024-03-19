@@ -58,6 +58,11 @@
         <artifactId>hibernate-core</artifactId>
         <version>${hibernate-core.version}</version>
       </dependency>
+      <dependency>
+        <groupId>org.wiremock</groupId>
+        <artifactId>wiremock</artifactId>
+        <version>${wiremock.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   <dependencies>
@@ -133,11 +138,6 @@
       <groupId>org.json</groupId>
       <artifactId>json</artifactId>
       <version>${org.json.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.wiremock</groupId>
-      <artifactId>wiremock</artifactId>
-      <version>${wiremock.version}</version>
     </dependency>
     <dependency>
       <groupId>org.assertj</groupId>
