@@ -31,4 +31,8 @@ public class MockService {
         wireMockServer.stop();
     }
 
+    public void registerStub(BaseStub baseStub) {
+        baseStub.register(wireMockServer);
+    }
+
 }
