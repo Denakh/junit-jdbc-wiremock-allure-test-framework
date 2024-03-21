@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 @Data
 @Builder
@@ -12,15 +13,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class TestObject {
 
+    public static final int STRING_PARAM_MAX_LENGTH = 32;
+
     private int intParam;
 
     @JsonProperty("strParam")
-    private String stringParam;
+    private JsonNullable<String> stringParam;
 
     public org.github.denakh.testsystem.model.db.TestObject getDbTestObject() {
         return org.github.denakh.testsystem.model.db.TestObject.builder()
                 .intParam(this.intParam)
-                .stringParam(this.stringParam)
+                .stringParam(this.stringParam.get())
                 .build();
     }
 

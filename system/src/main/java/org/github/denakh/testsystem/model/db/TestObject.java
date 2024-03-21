@@ -2,6 +2,7 @@ package org.github.denakh.testsystem.model.db;
 
 import lombok.Builder;
 import lombok.Data;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,7 +31,7 @@ public class TestObject {
     public org.github.denakh.testsystem.model.api.TestObject getApiTestObject() {
         return org.github.denakh.testsystem.model.api.TestObject.builder()
                 .intParam(this.intParam)
-                .stringParam(this.stringParam)
+                .stringParam(JsonNullable.of(this.stringParam))
                 .build();
     }
 
