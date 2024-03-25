@@ -6,6 +6,8 @@ import org.apache.commons.lang3.RandomStringUtils;
 @UtilityClass
 public class StringUtility {
 
+    public static final String POINT = ".";
+
     public static String generateStringOfLength(int count) {
         return RandomStringUtils.randomAlphanumeric(count);
     }

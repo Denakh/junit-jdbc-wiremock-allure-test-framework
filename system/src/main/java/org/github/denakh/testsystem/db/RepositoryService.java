@@ -2,11 +2,15 @@ package org.github.denakh.testsystem.db;
 
 
 import java.util.Properties;
+
+import lombok.Getter;
 import org.github.denakh.testsystem.db.dao.TestObjectDaoImpl;
 import org.github.denakh.testsystem.model.db.TestObject;
+import org.github.denakh.util.StringUtility;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+@Getter
 public class RepositoryService {
 
     private final TestObjectDaoImpl testObjectDao;
@@ -24,7 +28,6 @@ public class RepositoryService {
     }
 
     private static SessionFactory configureHibernate(String jdbcUrl, String user, String pass) {
-        final String point = ".";
         final String hibernateParamName = "hibernate";
         final String connectionParamName = "connection";
         final String urlParamName = "url";
@@ -38,24 +41,20 @@ public class RepositoryService {
         final String formatSqlParamName = "format_sql";
         final String driverParamName = "com.mysql.jdbc.Driver";
         Properties properties = new Properties();
-        properties.setProperty(String.join(point, hibernateParamName, connectionParamName, urlParamName), jdbcUrl);
-        properties.setProperty(dialectParamName, String.join(point, orgParamName, hibernateParamName, dialectParamName,
+        properties.setProperty(String.join(StringUtility.POINT, hibernateParamName, connectionParamName, urlParamName), jdbcUrl);
+        properties.setProperty(dialectParamName, String.join(StringUtility.POINT, orgParamName, hibernateParamName, dialectParamName,
                 mySQLDialectParamName));
-        properties.setProperty(String.join(point, hibernateParamName, connectionParamName, usernameParamName), user);
-        properties.setProperty(String.join(point, hibernateParamName, connectionParamName, passwordParamName), pass);
-        properties.setProperty(String.join(point, hibernateParamName, connectionParamName, driverClassParamName),
+        properties.setProperty(String.join(StringUtility.POINT, hibernateParamName, connectionParamName, usernameParamName), user);
+        properties.setProperty(String.join(StringUtility.POINT, hibernateParamName, connectionParamName, passwordParamName), pass);
+        properties.setProperty(String.join(StringUtility.POINT, hibernateParamName, connectionParamName, driverClassParamName),
                 driverParamName);
-        properties.setProperty(String.join(point, hibernateParamName, showSqlParamName), Boolean.toString(false));
-        properties.setProperty(String.join(point, hibernateParamName, formatSqlParamName), Boolean.toString(false));
+        properties.setProperty(String.join(StringUtility.POINT, hibernateParamName, showSqlParamName), Boolean.toString(false));
+        properties.setProperty(String.join(StringUtility.POINT, hibernateParamName, formatSqlParamName), Boolean.toString(false));
 
         Configuration configuration = new Configuration();
         configuration.addAnnotatedClass(TestObject.class);
 
         return configuration.addProperties(properties).buildSessionFactory();
-    }
-
-    public TestObjectDaoImpl getTestObjectDao() {
-        return testObjectDao;
     }
 
     public void removeAllTestDataFromDB() {

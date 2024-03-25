@@ -24,4 +24,4 @@ allure-site
 reports/test/
 
 #ENV
-utils/src/main/resources/.env
+.env
