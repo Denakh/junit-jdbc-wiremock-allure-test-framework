@@ -7,7 +7,8 @@ import java.util.Properties;
 
 public class EnvironmentHelper {
 
-    private static final String APP_DOMAIN = "denakh-test.com";
+    // private static final String APP_DOMAIN = "denakh-test.com";
+    private static final String APP_DOMAIN = "localhost:7777";
     private static final String DEFAULT_APP_TEST_ENV = "local";
     private static final String TEST_ENV_PARAM = "TEST_ENVIRONMENT";
     private static final String ENV_TOKEN_PARAM = "TOKEN";

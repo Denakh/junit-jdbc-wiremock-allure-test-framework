@@ -18,7 +18,7 @@ import org.openapitools.jackson.nullable.JsonNullableModule;
 public class TestObjectApiRequester {
 
     private static final String REQUEST_URL =
-            "https://" + EnvironmentHelper.getEnvDomain() + "/test-object";
+            "http://" + EnvironmentHelper.getEnvDomain() + "/test-object-endpoint";
 
     private final RequestSpecification requestSpecification;
 
@@ -35,9 +35,9 @@ public class TestObjectApiRequester {
                         }));
     }
 
-    TestObjectApiRequester() {
+    public TestObjectApiRequester() {
         PreemptiveOAuth2HeaderScheme auth2HeaderScheme = new PreemptiveOAuth2HeaderScheme();
-        auth2HeaderScheme.setAccessToken(EnvironmentHelper.getToken());
+        // auth2HeaderScheme.setAccessToken(EnvironmentHelper.getToken());
         this.requestSpecification = new RequestSpecBuilder()
                 .setBaseUri(REQUEST_URL)
                 .setAuth(auth2HeaderScheme)

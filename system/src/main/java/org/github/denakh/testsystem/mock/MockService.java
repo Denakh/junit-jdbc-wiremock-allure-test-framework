@@ -11,20 +11,20 @@ public class MockService {
 
     private final WireMockServer wireMockServer;
 
-    MockService() {
+    public MockService() {
         wireMockServer = new WireMockServer();
     }
 
-    MockService(int port) {
-        wireMockServer = new WireMockServer(WireMockConfiguration.options().httpsPort(port));
+    public MockService(int port) {
+        wireMockServer = new WireMockServer(WireMockConfiguration.options().port(port));
     }
 
     public void start() {
         wireMockServer.start();
-        stubFor(
-                WireMock.get(WireMock.urlEqualTo("/some/thing"))
-                        .willReturn(
-                                aResponse().withHeader("Content-Type", "text/plain").withBody("Hello world!")));
+//        stubFor(
+//                WireMock.get(WireMock.urlEqualTo("/some/thing"))
+//                        .willReturn(
+//                                aResponse().withHeader("Content-Type", "text/plain").withBody("Hello world!")));
     }
 
     public void stop() {

@@ -20,11 +20,11 @@ public class TestObject {
     @JsonProperty("strParam")
     private JsonNullable<String> stringParam;
 
-    public org.github.denakh.testsystem.model.db.TestObject getDbTestObject() {
-        return org.github.denakh.testsystem.model.db.TestObject.builder()
-                .intParam(this.intParam)
-                .stringParam(this.stringParam.get())
-                .build();
-    }
+//    public org.github.denakh.testsystem.model.db.TestObject getDbTestObject() {
+//        return org.github.denakh.testsystem.model.db.TestObject.builder()
+//                .intParam(this.intParam)
+//                .stringParam(this.stringParam == null ? null : this.stringParam.get())
+//                .build();
+//    }
 
 }
