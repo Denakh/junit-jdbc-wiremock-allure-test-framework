@@ -50,7 +50,9 @@ public class TestObjectApiRequester {
                 .given(this.requestSpecification)
                 .body(body)
                 .log().all()
-                .post();
+                .post()
+                .then().statusCode(201)
+                .extract().response();
         return response.as(TestObject.class);
     }
 

@@ -25,7 +25,7 @@ import static com.github.tomakehurst.wiremock.client.WireMock.post;
 public class PostTestObjectStub extends BaseStub {
 
     private final static String URL = "/test-object-endpoint";
-    private int STATUS_CODE = 201;
+    private final static int STATUS_CODE = 201;
 
     private int priority = 1;
     private TestObject requestBody;
