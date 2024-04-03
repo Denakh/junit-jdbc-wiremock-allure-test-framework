@@ -16,12 +16,15 @@ public class RepositoryService {
     private final TestObjectDaoImpl testObjectDao;
 
     public RepositoryService() {
-        final String dbUrlParamName = "DBUrl";
-        final String dbUserParamName = "DBUser";
-        final String dbPasswordParamName = "DBPassword";
-        String jdbcUrl = System.getenv(dbUrlParamName);
-        String user = System.getenv(dbUserParamName);
-        String pass = System.getenv(dbPasswordParamName);
+//        final String dbUrlParamName = "DBUrl";
+//        final String dbUserParamName = "DBUser";
+//        final String dbPasswordParamName = "DBPassword";
+//        String jdbcUrl = System.getenv(dbUrlParamName);
+//        String user = System.getenv(dbUserParamName);
+//        String pass = System.getenv(dbPasswordParamName);
+        String jdbcUrl = "jdbc:mysql://127.0.0.1:55555/mysql";
+        String user = "root";
+        String pass = "mypassword";
         SessionFactory sessionFactory = configureHibernate(jdbcUrl, user, pass);
         EntityManagerUtil entityManagerUtil = new EntityManagerUtil(sessionFactory);
         testObjectDao = new TestObjectDaoImpl(entityManagerUtil);
